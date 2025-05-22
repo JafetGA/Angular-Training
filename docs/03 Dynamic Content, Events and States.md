@@ -1,4 +1,4 @@
-# Visualización de Componentes Angular
+# Contenido Dinámico, Eventos y Estados
 
 > **Fecha:** 22 de mayo 2025
 
@@ -9,6 +9,7 @@
   - [🔧 Property Binding](#property-binding)
   - [🔧 Property Binding](#property-binding)
   - [🔧 Computed Values](#computed-values)
+  - [🔧 Events with Event Binding](#events-with-event-binding)
 - [🛠️ Ejemplos](#ejemplos)
     - [Crear un componente](#componentes-crear-un-componente)
 
@@ -122,6 +123,25 @@ De esta forma podemos acceder a la propiedad `imagePath` desde el HTML y no tene
 ```
 
 ### Events with Event Binding
+Ahora vamos a ver como podemos utilizar eventos en Angular. Para esto vamos a utilizar el evento `click` de un botón.
+
+La definición de un evento en Angular es por medio de `(nombre del evento) = "nombre del método"` esto es así porque Angular no puede saber si el valor que le estamos pasando es un string o una variable, por lo que al agregar los paréntesis Angular sabe que es un evento y no un string.
+
+AHora podemos utilizar cualquier método que tengamos en el componente para ejecutar una acción cuando se dispare el evento.
+
+```html
+    <button (click)="onSelectUser()">
+        ...
+    </button>
+```
+Invoca a
+```typescript
+  onSelectUser(){
+    console.log("clicked");
+  }
+```
+Normalmente, la convención para detectar que una parte del código es un evento es utilizar el prefijo `on` seguido del nombre del evento.
+
 
 ---
 
