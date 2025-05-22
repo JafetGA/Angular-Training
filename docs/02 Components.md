@@ -89,10 +89,15 @@ Que es justamente lo que visualizamos en el navegador.
 
 ### Componentes: Crear un componente
 
-Explicación de qué hace este ejemplo y cuándo usarlo.
+Al crear muchos componentes, es importante tener una buena estructura de carpetas para mantener el código organizado. A continuación, se muestra un ejemplo de cómo crear un componente en Angular.
 
 ```bash
-  Resultado o comportamiento esperado
+  ng generate component nombre-componente
+
+```
+or 
+```bash
+  ng g c nombre-componente
 ```
 
 ---
