@@ -10,6 +10,7 @@
   - [🔧 Property Binding](#property-binding)
   - [🔧 Computed Values](#computed-values)
   - [🔧 Events with Event Binding](#events-with-event-binding)
+  - [🔧 States](#states)
 - [🛠️ Ejemplos](#ejemplos)
     - [Crear un componente](#componentes-crear-un-componente)
 
@@ -141,6 +142,20 @@ Invoca a
   }
 ```
 Normalmente, la convención para detectar que una parte del código es un evento es utilizar el prefijo `on` seguido del nombre del evento.
+
+### States
+Manejar estados en Angular es tan simple como cambiar el valor de una variable en el componente y Angular se encarga de actualizar la vista automáticamente.
+
+Si tomamos el ejemplo anterior y agregamos un estado para el botón, podemos ver como Angular se encarga de actualizar la vista automáticamente.
+Cambiando el usuario en cada clic
+
+```typescript
+  onSelectUser(){
+    const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
+    this.selectedUser = DUMMY_USERS[randomIndex];
+  }
+```
+Hacemos override a la propiedad randomIndex y le asignamos un nuevo valor cada vez que se hace clic en el botón. Esto hace que Angular actualice la vista automáticamente y muestre un nuevo usuario cada vez que se hace clic en el botón.
 
 
 ---
