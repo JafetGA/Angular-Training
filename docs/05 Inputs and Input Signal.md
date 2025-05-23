@@ -1,6 +1,6 @@
 # Inputs y Input Signals en Angular
 
-> **Fecha:** 22 de mayo 2025
+> **Fecha:** 23 de mayo 2025
 
 ---
 ## Índice de Contenidos
@@ -26,17 +26,7 @@ Los **Inputs** son uno de los mecanismos fundamentales de comunicación en Angul
 El enfoque tradicional utiliza el decorador `@Input()` para marcar una propiedad de clase como entrada:
 
 ```typescript
-import { Component, Input } from '@angular/core';
 
-@Component({
-  selector: 'app-user',
-  template: `
-    <div>
-      <img [src]="'assets/users/' + avatar" [alt]="name">
-      <span>{{ name }}</span>
-    </div>
-  `
-})
 export class UserComponent {
   @Input({required: true}) avatar!: string;
   @Input({required: true}) name!: string;
@@ -52,22 +42,27 @@ Con este enfoque:
 - En la plantilla, usamos la propiedad sin paréntesis: `{{ name }}`
 - El sistema de detección de cambios de Angular (Zone.js) se encarga de actualizar el componente
 
+Los datos vienen de un componente padre a través de bindings en la plantilla:
+
+```html
+<app-user [avatar]="user.avatar" [name]="user.name"></app-user>
+```
+Se definen como si fueran atributos HTML, pero Angular los interpreta como propiedades de clase.
+
+Para que funcione correctamente el componente padre debe de contener la propiedad que se le pasa al hijo:
+
+```typescript
+export class AppComponent {
+    users = DUMMY_USERS;
+
+}
+```
+
 ### Input Signals
 
 El nuevo enfoque con Signals utiliza la función `input()`:
 
 ```typescript
-import { Component, input, computed } from '@angular/core';
-
-@Component({
-  selector: 'app-user',
-  template: `
-    <div>
-      <img [src]="imagePath()" [alt]="name()">
-      <span>{{ name() }}</span>
-    </div>
-  `
-})
 export class UserComponent {
   avatar = input.required<string>();
   name = input.required<string>();
@@ -86,15 +81,15 @@ Con Input Signals:
 
 ### Comparativa
 
-| Característica | Input Decorador | Input Signal |
-|----------------|----------------|--------------|
-| Sintaxis | `@Input() propiedad` | `propiedad = input<Tipo>()` |
-| Acceso al valor | Directo: `this.propiedad` | Función: `this.propiedad()` |
-| En plantillas | `{{ propiedad }}` | `{{ propiedad() }}` |
-| Reactividad | Basada en Zone.js | Basada en Signals (más eficiente) |
-| Valores derivados | Getters o propiedades adicionales | Usando `computed()` |
-| Requerido | `@Input({required: true})` | `input.required<Tipo>()` |
-| Tipado | Explícito | Inferido o explícito |
+| Característica    | Input Decorador                   | Input Signal                      |
+|-------------------|-----------------------------------|-----------------------------------|
+| Sintaxis          | `@Input() propiedad`              | `propiedad = input<Tipo>()`       |
+| Acceso al valor   | Directo: `this.propiedad`         | Función: `this.propiedad()`       |
+| En plantillas     | `{{ propiedad }}`                 | `{{ propiedad() }}`               |
+| Reactividad       | Basada en Zone.js                 | Basada en Signals (más eficiente) |
+| Valores derivados | Getters o propiedades adicionales | Usando `computed()`               |
+| Requerido         | `@Input({required: true})`        | `input.required<Tipo>()`          |
+| Tipado            | Explícito                         | Inferido o explícito              |
 
 ---
 
@@ -122,27 +117,7 @@ avatar = input.required<string>();
 count = input<number>(0);
 ```
 
-### Transformaciones (solo con Input Signals)
 
-```typescript
-// Convertir automáticamente strings a números
-userId = input<number, string>(0, {
-  transform: (value: string) => parseInt(value, 10)
-});
-```
-
-### Alias para inputs (manera alternativa)
-
-```typescript
-// Con decorador
-@Input('usuarioNombre') name!: string;
-
-// O usando metadatos
-@Component({
-  // ...
-  inputs: ['avatar:userAvatar']
-})
-```
 
 ---
 
