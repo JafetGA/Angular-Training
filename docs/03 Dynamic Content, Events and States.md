@@ -7,7 +7,6 @@
 - [🔍 Resumen](#resumen)
 - [💡 Descripción](#descripción)
   - [🔧 Property Binding](#property-binding)
-  - [🔧 Property Binding](#property-binding)
   - [🔧 Computed Values](#computed-values)
   - [🔧 Events with Event Binding](#events-with-event-binding)
   - [🔧 States](#states)
