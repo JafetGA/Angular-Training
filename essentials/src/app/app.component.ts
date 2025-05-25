@@ -17,7 +17,7 @@ import { DUMMY_USERS } from "./dummy-users";
 })
 export class AppComponent {
   users = DUMMY_USERS;
-  selectedUserID: string = '';
+  selectedUserID?: string;
 
   get userSelected(){
     return this.users.find(user => user.id === this.selectedUserID);
