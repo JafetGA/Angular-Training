@@ -10,8 +10,12 @@ title: "Visualización de Componentes Angular"
 ## Índice de Contenidos
 - [🔍 Resumen](#resumen)
 - [💡 Descripción](#descripción)
+- [📚 Estructura de un Componente Angular](#estructura-de-un-componente-angular)
+- [📝 Cómo se muestra la información](#como-se-muestra-la-información)
+- [📩 Componente envolvente](#componente-envolvente)
 - [🛠️ Ejemplos](#ejemplos)
   - [Crear un componente](#componentes-crear-un-componente)
+  - [Componente Envolvente (reutilizar un estilo)](#componente-envolvente-reutilizar-un-estilo)
 
 ---
 
@@ -21,19 +25,17 @@ Todo en angular es un componente, y cada componente tiene su propio ciclo de vid
 ---
 
 ## Descripción
-
+### Estructura de un Componente Angular
 ```powershell
     # Estructura de capreta
     src
-    ├── app
-    │   ├── app.component.ts
-    │   ├── app.component.html
-    │   ├── app.component.css
-    │
-    ├── index.html
-    ├── main.ts
-    ├── style.css
+    ├── component_name
+    │   ├── component_name.component.ts
+    │   ├── component_name.component.html
+    │   ├── component_name.component.css
+    
 ```
+Esta es la estructura básica de un componente en Angular. Cada componente tiene su propio archivo TypeScript, HTML y CSS. El archivo TypeScript contiene la lógica del componente, el archivo HTML contiene la plantilla del componente y el archivo CSS contiene los estilos del componente.
 
 ### Como se muestra la información
 index.html
@@ -82,6 +84,15 @@ app.component.html
 Desde el archivo `app.component.html` podemos ver que se carga una imagen y un texto.
 Que es justamente lo que visualizamos en el navegador.
 
+### Componente envolvente
+
+En Angular podemos hacer que los componentes envuelvan a otros componentes. Esto es útil para crear componentes reutilizables y para organizar mejor el código.
+```html
+<div>
+  <ng-content/>
+</div>
+```
+Esta es la estructura básica de un componente envolvente. El `<ng-content/>` es un marcador de posición que se reemplaza con el contenido del componente hijo.
 
 ---
 
@@ -99,6 +110,39 @@ or
 ```bash
   ng g c nombre-componente
 ```
+### Componente Envolvente (reutilizar un estilo)
+
+Definimos un componente envolvente que se encargará de envolver otros componentes y aplicar un estilo común a todos ellos.
+
+```css
+div {
+  border-radius: 6px;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+```
+```html
+<div>
+  <ng-content/>
+</div>
+```
+
+Esto nos permite reutilizar el estilo en diferentes componentes sin tener que repetir el código CSS. Simplemente envolvemos los componentes que queremos estilizar con este componente envolvente.
+
+```html
+<app-card>
+  <article>
+    <h2>{{ task.title }}</h2>
+    <time>{{ task.dueDate | date:'fullDate'}}</time>
+    <p>{{ task.summary }}</p>
+    <p class="actions">
+      <button (click)="onCompleteTask()">Complete</button>
+    </p>
+  </article>
+</app-card>
+```
+
+`app-card` es el componente envolvente que hemos creado. Dentro de él, podemos colocar cualquier contenido que queramos estilizar con el estilo definido en el componente envolvente.
 
 ---
 [🔍 TOP](#índice-de-contenidos)
