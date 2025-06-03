@@ -6,6 +6,9 @@
 ## Índice de Contenidos
 - [🔍 Resumen](#resumen)
 - [💡 Descripción](#descripción)
+  - [📦 Módulo Raíz](#módulo-raíz)
+  - [📦 Declaración de Módulos](#declaración-de-módulos)
+  - [📦 Módulos compartidos](#módulos-compartidos)
 - [📚 Ejemplos](#ejemplos)
 
 ---
